@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "negocio", "negocio\negocio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConexionDB", "Conexion.DB\ConexionDB.csproj", "{D20B3642-D9A4-4ACA-9506-A2B1E74BFA8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cargar_disco_form", "cargar_disco_form\cargar_disco_form.csproj", "{61F96FF6-1C70-44C1-83CF-03ED40FC0D16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D20B3642-D9A4-4ACA-9506-A2B1E74BFA8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D20B3642-D9A4-4ACA-9506-A2B1E74BFA8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D20B3642-D9A4-4ACA-9506-A2B1E74BFA8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F96FF6-1C70-44C1-83CF-03ED40FC0D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F96FF6-1C70-44C1-83CF-03ED40FC0D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F96FF6-1C70-44C1-83CF-03ED40FC0D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F96FF6-1C70-44C1-83CF-03ED40FC0D16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

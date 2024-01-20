@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using dominio;
-//using negocio;
 
-
-namespace discos_form
+namespace cargar_disco_form
 {
     internal static class Program
     {
@@ -19,8 +16,7 @@ namespace discos_form
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDiscos());
-            
+            Application.Run(new frmCargarDisco());
         }
     }
 }

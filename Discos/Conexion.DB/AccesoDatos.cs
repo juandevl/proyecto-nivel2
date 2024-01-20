@@ -30,6 +30,19 @@ namespace ConexionDB
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
+        public void insertarConsulta()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         //Procedimiento para ejecutar la lectura de los datos 
         public void ejecutarLectura()

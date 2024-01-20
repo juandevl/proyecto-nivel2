@@ -45,5 +45,33 @@ namespace negocio
                 tabla_discos.cerrarConexion();
             }
         }
+
+        public void insertarDisco(Disco disco)
+        {
+            AccesoDatos tabla_disco = new AccesoDatos("DISCOS_DB");
+            string fecha = disco.FechaLanzamiento.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+            //############      REVISAR ESTE CODIGO ###############
+
+            //string query = $"INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdTipoEdicion) VALUES ('{disco.Titulo}','{fecha}',{disco.CantidadCanciones},'{disco.UrlImagenTapa}',(SELECT Id FROM ESTILOS WHERE Descripcion = '{disco.Estilo.Descripcion}'),(SELECT Id FROM TIPOSEDICION WHERE Descripcion = '{disco.TipoEdicion.Descripcion}')"; 
+            string query = $"INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdTipoEdicion) VALUES ('{disco.Titulo}','{fecha}',{disco.CantidadCanciones},'{disco.UrlImagenTapa}',3,2)";
+
+
+            try
+            {
+                tabla_disco.query(query);
+                tabla_disco.insertarConsulta();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                tabla_disco.cerrarConexion();
+            }
+            
+        }
     }
 }

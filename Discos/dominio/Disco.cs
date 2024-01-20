@@ -19,6 +19,7 @@ namespace dominio
         {
             this.Estilo = new Estilo();
             this.TipoEdicion = new TipoEdicion();
+            this.FechaLanzamiento = new DateTime();
         }
 
     }
