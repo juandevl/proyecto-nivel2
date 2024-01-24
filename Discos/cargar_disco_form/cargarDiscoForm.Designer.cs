@@ -70,7 +70,7 @@
             // lblGenero
             // 
             this.lblGenero.AutoSize = true;
-            this.lblGenero.Location = new System.Drawing.Point(71, 237);
+            this.lblGenero.Location = new System.Drawing.Point(72, 433);
             this.lblGenero.Name = "lblGenero";
             this.lblGenero.Size = new System.Drawing.Size(57, 19);
             this.lblGenero.TabIndex = 2;
@@ -97,7 +97,7 @@
             // lblUrlImagenDisco
             // 
             this.lblUrlImagenDisco.AutoSize = true;
-            this.lblUrlImagenDisco.Location = new System.Drawing.Point(71, 429);
+            this.lblUrlImagenDisco.Location = new System.Drawing.Point(71, 240);
             this.lblUrlImagenDisco.Name = "lblUrlImagenDisco";
             this.lblUrlImagenDisco.Size = new System.Drawing.Size(119, 19);
             this.lblUrlImagenDisco.TabIndex = 5;
@@ -116,12 +116,12 @@
             // tbUrlImagenDisco
             // 
             this.tbUrlImagenDisco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbUrlImagenDisco.Location = new System.Drawing.Point(74, 453);
+            this.tbUrlImagenDisco.Location = new System.Drawing.Point(74, 264);
             this.tbUrlImagenDisco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbUrlImagenDisco.MaxLength = 200;
             this.tbUrlImagenDisco.Name = "tbUrlImagenDisco";
             this.tbUrlImagenDisco.Size = new System.Drawing.Size(244, 24);
-            this.tbUrlImagenDisco.TabIndex = 5;
+            this.tbUrlImagenDisco.TabIndex = 2;
             this.tbUrlImagenDisco.Leave += new System.EventHandler(this.tbUrlImagenDisco_Leave);
             // 
             // dtpFechaLanzamiento
@@ -137,11 +137,11 @@
             this.cbGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenero.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbGenero.FormattingEnabled = true;
-            this.cbGenero.Location = new System.Drawing.Point(74, 261);
+            this.cbGenero.Location = new System.Drawing.Point(75, 457);
             this.cbGenero.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbGenero.Name = "cbGenero";
             this.cbGenero.Size = new System.Drawing.Size(244, 27);
-            this.cbGenero.TabIndex = 2;
+            this.cbGenero.TabIndex = 5;
             // 
             // cbFormato
             // 

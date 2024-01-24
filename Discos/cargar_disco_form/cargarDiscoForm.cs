@@ -14,28 +14,43 @@ namespace cargar_disco_form
 {
     public partial class frmCargarDisco : Form
     {
+        private Disco disco = null;
         public frmCargarDisco()
         {
             InitializeComponent();
+        }
+        public frmCargarDisco(Disco disco)
+        {
+            InitializeComponent();
+            lblAltaDisco.Text = "Actualizacion de disco";
+            this.disco = disco;
+
+
         }
 
         private void frmCargarDisco_Load(object sender, EventArgs e)
         {
             EstiloNegocio estiloNegocio = new EstiloNegocio();
             TipoEdicionNegocio tiposNegocio = new TipoEdicionNegocio();
-            List<Estilo> estilos = estiloNegocio.listaEstilos();
-            List<TipoEdicion> tipos = tiposNegocio.listaTiposEdicion();
-            foreach(Estilo estilo in estilos)
-            {
-                cbGenero.Items.Add(estilo.Descripcion);
-            }
-            foreach(TipoEdicion tipo in tipos)
-            {
-                cbFormato.Items.Add(tipo.Descripcion);
-            }
+            cbGenero.DataSource = estiloNegocio.listaEstilos();
+            cbGenero.ValueMember = "Id";
+            cbGenero.DisplayMember = "Descripcion";
+            cbFormato.DataSource = tiposNegocio.listaTiposEdicion();
+            cbFormato.ValueMember = "Id";
+            cbFormato.DisplayMember = "Descripcion";
 
-            cbGenero.SelectedIndex = 0;
-            cbFormato.SelectedIndex = 0;
+            if (!(disco is null))
+            {
+                tbTitulo.Text = disco.Titulo;
+                tbUrlImagenDisco.Text = disco.UrlImagenTapa;
+                numCantidadCanciones.Value = disco.CantidadCanciones;
+                //cbGenero.SelectedItem = disco.Estilo;
+                //cbFormato.SelectedItem = disco.TipoEdicion;
+                cbGenero.SelectedValue = disco.Estilo.Id;
+                cbFormato.SelectedValue = disco.TipoEdicion.Id;
+                dtpFechaLanzamiento.Value = disco.FechaLanzamiento;
+                cargarImagen(disco.UrlImagenTapa);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -45,20 +60,31 @@ namespace cargar_disco_form
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            Disco disco = new Disco();
             DiscoNegocio disconegocio = new DiscoNegocio();
+            
             try
-            {
+            {   
+                if (disco is null)
+                    disco = new Disco();
+
                 disco.Titulo = tbTitulo.Text;
                 disco.CantidadCanciones = (int)numCantidadCanciones.Value;
                 disco.UrlImagenTapa = tbUrlImagenDisco.Text;
                 disco.FechaLanzamiento = dtpFechaLanzamiento.Value;
-                disco.Estilo.Descripcion = cbGenero.Text;
-                disco.TipoEdicion.Descripcion = cbFormato.Text;
+                disco.Estilo = (Estilo)cbGenero.SelectedItem;
+                disco.TipoEdicion = (TipoEdicion)cbFormato.SelectedItem;
 
-                disconegocio.insertarDisco(disco);
-                MessageBox.Show("Se inserto el nuevo disco.", "Success", MessageBoxButtons.OK);
-                //MessageBox.Show($"{disco.Titulo}\r\n{disco.CantidadCanciones}\r\n{disco.UrlImagenTapa}\r\n{disco.FechaLanzamiento.ToShortDateString()}\r\n{disco.Estilo.Descripcion}\r\n{disco.TipoEdicion.Descripcion}");
+                if (disco.Id != 0)
+                {
+                    disconegocio.modificarDisco(disco);
+                    MessageBox.Show("Se modifico exitosamente.", "Success", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    disconegocio.insertarDisco(disco);
+                    MessageBox.Show("Se cargo exitosamente.", "Success", MessageBoxButtons.OK);
+                }
+
                 Close();
             }
             catch (Exception ex)
@@ -71,7 +97,11 @@ namespace cargar_disco_form
 
         private void tbUrlImagenDisco_Leave(object sender, EventArgs e)
         {
-            string img = tbUrlImagenDisco.Text;
+            cargarImagen(tbUrlImagenDisco.Text);
+        }
+
+        private void cargarImagen(string img)
+        {
             try
             {
                 pbPrevImagen.Load(img);
@@ -82,5 +112,6 @@ namespace cargar_disco_form
                 pbPrevImagen.Load("https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg");
             }
         }
+
     }
 }

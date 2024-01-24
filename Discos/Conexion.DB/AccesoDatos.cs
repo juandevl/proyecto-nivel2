@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 
 
 namespace ConexionDB
@@ -25,12 +26,12 @@ namespace ConexionDB
         }
 
         //Procedimiento para solicitar la consulta a la db
-        public void query(string consulta)
+        public void consulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
-        public void insertarConsulta()
+        public void ejecutarConsulta()
         {
             comando.Connection = conexion;
             try
@@ -66,6 +67,11 @@ namespace ConexionDB
             
             conexion.Close();
 
+        }
+
+        public void setParametro(string parametro, object valor)
+        {
+            comando.Parameters.AddWithValue(parametro, valor);
         }
 
     }

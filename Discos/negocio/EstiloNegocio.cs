@@ -17,7 +17,7 @@ namespace negocio
 
             try
             {
-                tabla_estilos.query("SELECT Id, Descripcion FROM ESTILOS");
+                tabla_estilos.consulta("SELECT Id, Descripcion FROM ESTILOS");
                 tabla_estilos.ejecutarLectura();
                 while (tabla_estilos.Lector.Read())
                 {
@@ -29,6 +29,29 @@ namespace negocio
                 }
 
                 return estilos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                tabla_estilos.cerrarConexion();
+            }
+        }
+
+        public int GetIdEstilo(string Descripcion)
+        {
+            AccesoDatos tabla_estilos = new AccesoDatos("DISCOS_DB");
+            int id = -1;
+            try
+            {
+                tabla_estilos.consulta($"SELECT Id FROM ESTILOS WHERE Descripcion = '{Descripcion}'");
+                tabla_estilos.ejecutarLectura();
+                if (tabla_estilos.Lector.Read())
+                    id = (int)tabla_estilos.Lector["Id"];
+
+                return id;
             }
             catch (Exception ex)
             {

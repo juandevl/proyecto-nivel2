@@ -16,7 +16,7 @@ namespace negocio
             List<TipoEdicion> lista = new List<TipoEdicion>();
             try
             {
-                tabla_tipo_edicion.query("SELECT Id, Descripcion FROM TIPOSEDICION");
+                tabla_tipo_edicion.consulta("SELECT Id, Descripcion FROM TIPOSEDICION");
                 tabla_tipo_edicion.ejecutarLectura();
                 while (tabla_tipo_edicion.Lector.Read())
                 {
@@ -35,6 +35,29 @@ namespace negocio
             finally
             {
                 tabla_tipo_edicion.cerrarConexion();
+            }
+        }
+
+        public int GetIdTipoEdicion(string Descripcion)
+        {
+            AccesoDatos t_tipoEdicion = new AccesoDatos("DISCOS_DB");
+            int id = -1;
+            try
+            {
+                t_tipoEdicion.consulta($"SELECT Id FROM TIPOSEDICION WHERE Descripcion = '{Descripcion}'");
+                t_tipoEdicion.ejecutarLectura();
+                if (t_tipoEdicion.Lector.Read())
+                    id = (int)t_tipoEdicion.Lector["Id"];
+                
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                t_tipoEdicion.cerrarConexion();
             }
         }
     }
