@@ -135,5 +135,57 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Disco> filtrarDiscoGenero(Estilo genero)
+        {
+            List<Disco> discos = new List<Disco>();
+            AccesoDatos con = new AccesoDatos("DISCOS_DB");
+            try
+            {
+                string consulta = "SELECT D.Id, Titulo, CantidadCanciones, FechaLanzamiento, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo idestilo, D.IdTipoEdicion idedicion FROM DISCOS D JOIN ESTILOS E ON D.IdEstilo = E.Id JOIN TIPOSEDICION T ON D.IdTipoEdicion = T.Id WHERE E.Descripcion = @genero";
+                con.consulta(consulta);
+                con.setParametro("@genero", genero.Descripcion);
+                con.ejecutarLectura();
+
+                while (con.Lector.Read())
+                {
+                    Disco aux = new Disco();
+                    aux.Id = (int)con.Lector["Id"];
+                    //aux.Id = tabla_discos.Lector.GetInt32(0);
+                    aux.Titulo = (string)con.Lector["Titulo"];
+                    //Para validar si la imagen celda de la tabla de la base de datos
+                    // es null, debemos hacer de la siguiente manera
+                    //##### FORMA 1
+                    //if(!tabla_discos.Lector.IsDBNull(tabla_discos.Lector.GetOrdinal("UrlImagenTapa")))
+                    //    aux.UrlImagenTapa = (string)tabla_discos.Lector["UrlImagenTapa"];
+
+                    //##### FORMA 2
+                    if (!(con.Lector["UrlImagenTapa"] is DBNull))
+                        aux.UrlImagenTapa = (string)con.Lector["UrlImagenTapa"];
+
+
+                    aux.CantidadCanciones = (int)con.Lector["CantidadCanciones"];
+                    aux.Estilo.Id = (int)con.Lector["idestilo"];
+                    aux.Estilo.Descripcion = (string)con.Lector["Genero"];
+
+                    aux.TipoEdicion.Id = (int)con.Lector["idedicion"];
+                    aux.TipoEdicion.Descripcion = (string)con.Lector["Formato"];
+                    aux.FechaLanzamiento = (DateTime)con.Lector["FechaLanzamiento"];
+
+                    discos.Add(aux);
+
+                }
+
+                return discos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.cerrarConexion();
+            }
+        }
     }
 }

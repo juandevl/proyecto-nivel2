@@ -41,6 +41,8 @@ namespace discos_form
             this.btnEliminarDisco = new System.Windows.Forms.Button();
             this.btnModificarDisco = new System.Windows.Forms.Button();
             this.btnAgregarEstilo = new System.Windows.Forms.Button();
+            this.cbFiltrarGenero = new System.Windows.Forms.ComboBox();
+            this.lblFiltroGenero = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,15 +61,16 @@ namespace discos_form
             // 
             this.dgvDiscos.AllowUserToAddRows = false;
             this.dgvDiscos.AllowUserToDeleteRows = false;
-            this.dgvDiscos.AllowUserToOrderColumns = true;
             this.dgvDiscos.AllowUserToResizeColumns = false;
             this.dgvDiscos.AllowUserToResizeRows = false;
-            this.dgvDiscos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvDiscos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(43)))), ((int)(((byte)(76)))));
+            this.dgvDiscos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDiscos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDiscos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(51)))));
             this.dgvDiscos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDiscos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvDiscos.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.dgvDiscos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvDiscos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(37)))), ((int)(((byte)(76)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,6 +94,8 @@ namespace discos_form
             this.dgvDiscos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(222)))), ((int)(((byte)(195)))));
             this.dgvDiscos.Location = new System.Drawing.Point(75, 68);
             this.dgvDiscos.Margin = new System.Windows.Forms.Padding(10);
+            this.dgvDiscos.MaximumSize = new System.Drawing.Size(1038, 275);
+            this.dgvDiscos.MinimumSize = new System.Drawing.Size(1038, 100);
             this.dgvDiscos.MultiSelect = false;
             this.dgvDiscos.Name = "dgvDiscos";
             this.dgvDiscos.ReadOnly = true;
@@ -106,6 +111,7 @@ namespace discos_form
             this.dgvDiscos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDiscos.RowHeadersVisible = false;
             this.dgvDiscos.RowHeadersWidth = 51;
+            this.dgvDiscos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(68)))), ((int)(((byte)(148)))));
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,7 +123,7 @@ namespace discos_form
             this.dgvDiscos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDiscos.RowTemplate.Height = 24;
             this.dgvDiscos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDiscos.Size = new System.Drawing.Size(1122, 50);
+            this.dgvDiscos.Size = new System.Drawing.Size(1038, 250);
             this.dgvDiscos.TabIndex = 1;
             // 
             // btnAgregarDisco
@@ -179,12 +185,35 @@ namespace discos_form
             this.btnAgregarEstilo.Text = "Agregar estilo";
             this.btnAgregarEstilo.UseVisualStyleBackColor = true;
             // 
+            // cbFiltrarGenero
+            // 
+            this.cbFiltrarGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFiltrarGenero.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cbFiltrarGenero.FormattingEnabled = true;
+            this.cbFiltrarGenero.Location = new System.Drawing.Point(451, 400);
+            this.cbFiltrarGenero.Name = "cbFiltrarGenero";
+            this.cbFiltrarGenero.Size = new System.Drawing.Size(214, 27);
+            this.cbFiltrarGenero.TabIndex = 6;
+            this.cbFiltrarGenero.DropDownClosed += new System.EventHandler(this.cbFiltrarGenero_DropDownClosed);
+            // 
+            // lblFiltroGenero
+            // 
+            this.lblFiltroGenero.AutoSize = true;
+            this.lblFiltroGenero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(151)))), ((int)(((byte)(171)))));
+            this.lblFiltroGenero.Location = new System.Drawing.Point(451, 378);
+            this.lblFiltroGenero.Name = "lblFiltroGenero";
+            this.lblFiltroGenero.Size = new System.Drawing.Size(116, 19);
+            this.lblFiltroGenero.TabIndex = 7;
+            this.lblFiltroGenero.Text = "Filtrar por genero";
+            // 
             // frmDiscos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(51)))));
-            this.ClientSize = new System.Drawing.Size(1282, 674);
+            this.ClientSize = new System.Drawing.Size(1234, 674);
+            this.Controls.Add(this.lblFiltroGenero);
+            this.Controls.Add(this.cbFiltrarGenero);
             this.Controls.Add(this.btnAgregarEstilo);
             this.Controls.Add(this.btnModificarDisco);
             this.Controls.Add(this.btnEliminarDisco);
@@ -212,6 +241,8 @@ namespace discos_form
         private Button btnEliminarDisco;
         private Button btnModificarDisco;
         private Button btnAgregarEstilo;
+        private ComboBox cbFiltrarGenero;
+        private Label lblFiltroGenero;
     }
 }
 
