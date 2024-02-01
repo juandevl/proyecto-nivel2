@@ -43,6 +43,7 @@ namespace discos_form
             this.btnAgregarEstilo = new System.Windows.Forms.Button();
             this.cbFiltrarGenero = new System.Windows.Forms.ComboBox();
             this.lblFiltroGenero = new System.Windows.Forms.Label();
+            this.btnRecuperarDiscos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,12 +207,28 @@ namespace discos_form
             this.lblFiltroGenero.TabIndex = 7;
             this.lblFiltroGenero.Text = "Filtrar por genero";
             // 
+            // btnRecuperarDiscos
+            // 
+            this.btnRecuperarDiscos.AutoSize = true;
+            this.btnRecuperarDiscos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(43)))), ((int)(((byte)(76)))));
+            this.btnRecuperarDiscos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRecuperarDiscos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(151)))), ((int)(((byte)(171)))));
+            this.btnRecuperarDiscos.Location = new System.Drawing.Point(75, 518);
+            this.btnRecuperarDiscos.Name = "btnRecuperarDiscos";
+            this.btnRecuperarDiscos.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.btnRecuperarDiscos.Size = new System.Drawing.Size(145, 41);
+            this.btnRecuperarDiscos.TabIndex = 8;
+            this.btnRecuperarDiscos.Text = "Recuperar discos";
+            this.btnRecuperarDiscos.UseVisualStyleBackColor = true;
+            this.btnRecuperarDiscos.Click += new System.EventHandler(this.btnRecuperarDiscos_Click);
+            // 
             // frmDiscos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(1234, 674);
+            this.Controls.Add(this.btnRecuperarDiscos);
             this.Controls.Add(this.lblFiltroGenero);
             this.Controls.Add(this.cbFiltrarGenero);
             this.Controls.Add(this.btnAgregarEstilo);
@@ -243,6 +260,7 @@ namespace discos_form
         private Button btnAgregarEstilo;
         private ComboBox cbFiltrarGenero;
         private Label lblFiltroGenero;
+        private Button btnRecuperarDiscos;
     }
 }
 

@@ -45,6 +45,7 @@
             this.lblAltaDisco = new System.Windows.Forms.Label();
             this.pbPrevImagen = new System.Windows.Forms.PictureBox();
             this.lblPrevImagen = new System.Windows.Forms.Label();
+            this.btnBuscarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidadCanciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrevImagen)).BeginInit();
             this.SuspendLayout();
@@ -220,12 +221,23 @@
             this.lblPrevImagen.TabIndex = 16;
             this.lblPrevImagen.Text = "Previsualizacion de imagen";
             // 
+            // btnBuscarImagen
+            // 
+            this.btnBuscarImagen.Location = new System.Drawing.Point(335, 261);
+            this.btnBuscarImagen.Name = "btnBuscarImagen";
+            this.btnBuscarImagen.Size = new System.Drawing.Size(31, 31);
+            this.btnBuscarImagen.TabIndex = 17;
+            this.btnBuscarImagen.Text = "+";
+            this.btnBuscarImagen.UseVisualStyleBackColor = true;
+            this.btnBuscarImagen.Click += new System.EventHandler(this.btnBuscarImagen_Click);
+            // 
             // frmCargarDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(793, 667);
+            this.Controls.Add(this.btnBuscarImagen);
             this.Controls.Add(this.tbTitulo);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblFechaLanzamiento);
@@ -276,6 +288,7 @@
         private System.Windows.Forms.Label lblAltaDisco;
         private System.Windows.Forms.PictureBox pbPrevImagen;
         private System.Windows.Forms.Label lblPrevImagen;
+        private System.Windows.Forms.Button btnBuscarImagen;
     }
 }
 

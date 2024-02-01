@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using dominio;
 using negocio;
+using System.Configuration;
 
 namespace cargar_disco_form
 {
@@ -24,7 +27,6 @@ namespace cargar_disco_form
             InitializeComponent();
             lblAltaDisco.Text = "Actualizacion de disco";
             this.disco = disco;
-
 
         }
 
@@ -73,6 +75,7 @@ namespace cargar_disco_form
                 disco.FechaLanzamiento = dtpFechaLanzamiento.Value;
                 disco.Estilo = (Estilo)cbGenero.SelectedItem;
                 disco.TipoEdicion = (TipoEdicion)cbFormato.SelectedItem;
+                disco.Activo = true;
 
                 if (disco.Id != 0)
                 {
@@ -84,13 +87,15 @@ namespace cargar_disco_form
                     disconegocio.insertarDisco(disco);
                     MessageBox.Show("Se cargo exitosamente.", "Success", MessageBoxButtons.OK);
                 }
-
-                Close();
             }
             catch (Exception ex)
             {
                 throw ex;
                 //MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                this.Close();
             }
 
         }
@@ -105,7 +110,6 @@ namespace cargar_disco_form
             try
             {
                 pbPrevImagen.Load(img);
-
             }
             catch (Exception)
             {
@@ -113,5 +117,21 @@ namespace cargar_disco_form
             }
         }
 
+        private void btnBuscarImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg|png|*.png";
+            if(archivo.ShowDialog() == DialogResult.OK)
+            {
+                tbUrlImagenDisco.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+                //Almacenamos la imagen de forma local
+                //De esta manera no lo almacena
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["discos-img"] + archivo.SafeFileName, true);
+                //Si le paso la direccion como string lo almacena correctamente
+                //File.Copy(archivo.FileName, "C:\\discos\\" + archivo.SafeFileName);
+
+            }
+        }
     }
 }

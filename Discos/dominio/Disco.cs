@@ -19,7 +19,10 @@ namespace dominio
         [DisplayName("Fecha lanzamiento")]
         public DateTime FechaLanzamiento { get; set; }
         public Estilo Estilo { get; set; }
+        [DisplayName("Formato")]
         public TipoEdicion TipoEdicion { get; set; }
+        public bool Activo { get; set; }
+
         public Disco() 
         {
             this.Estilo = new Estilo();

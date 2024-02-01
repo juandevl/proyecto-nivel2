@@ -16,13 +16,14 @@ namespace negocio
             AccesoDatos tabla_discos = new AccesoDatos("DISCOS_DB");
             try
             {
-                tabla_discos.consulta("SELECT D.Id, Titulo, CantidadCanciones, FechaLanzamiento, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo idestilo, D.IdTipoEdicion idedicion FROM DISCOS D JOIN ESTILOS E ON D.IdEstilo = E.Id JOIN TIPOSEDICION T ON D.IdTipoEdicion = T.Id");
+                tabla_discos.consulta("SELECT D.Id, Activo, Titulo, CantidadCanciones, FechaLanzamiento, UrlImagenTapa, E.Descripcion Genero, T.Descripcion Formato, D.IdEstilo idestilo, D.IdTipoEdicion idedicion FROM DISCOS D JOIN ESTILOS E ON D.IdEstilo = E.Id JOIN TIPOSEDICION T ON D.IdTipoEdicion = T.Id");
                 tabla_discos.ejecutarLectura();
 
                 while (tabla_discos.Lector.Read())
                 {
                     Disco aux = new Disco();
                     aux.Id = (int)tabla_discos.Lector["Id"];
+                    aux.Activo = (bool)tabla_discos.Lector["Activo"];
                     //aux.Id = tabla_discos.Lector.GetInt32(0);
                     aux.Titulo = (string)tabla_discos.Lector["Titulo"];
                     //Para validar si la imagen celda de la tabla de la base de datos
@@ -66,7 +67,7 @@ namespace negocio
 
             //string query = $"INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdTipoEdicion) VALUES ('{disco.Titulo}','{fecha}',{disco.CantidadCanciones},'{disco.UrlImagenTapa}',{disco.Estilo.Id},{disco.TipoEdicion.Id})"; 
 
-            string consultaParametros = "INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdTipoEdicion) VALUES (@Titulo, @FechaLanzamiento, @CantidadCanciones, @UrlImagenTapa ,@IdEstilo ,@IdTipoEdicion)";
+            string consultaParametros = "INSERT INTO DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, IdEstilo, IdTipoEdicion, Activo) VALUES (@Titulo, @FechaLanzamiento, @CantidadCanciones, @UrlImagenTapa ,@IdEstilo ,@IdTipoEdicion, @Activo)";
             try
             {
                 tabla_disco.consulta(consultaParametros);
@@ -76,6 +77,7 @@ namespace negocio
                 tabla_disco.setParametro("@UrlImagenTapa", disco.UrlImagenTapa);
                 tabla_disco.setParametro("@IdEstilo", disco.Estilo.Id);
                 tabla_disco.setParametro("@IdTipoEdicion", disco.TipoEdicion.Id);
+                tabla_disco.setParametro("@Activo", disco.Activo);
                 tabla_disco.ejecutarConsulta();
             }
             catch (Exception ex)
@@ -91,13 +93,13 @@ namespace negocio
 
         public void eliminarDisco(Disco disco)
         {
-            AccesoDatos datos = new AccesoDatos("DISCOS_DB");
+            AccesoDatos tablaDiscos = new AccesoDatos("DISCOS_DB");
             string consulta = "DELETE FROM DISCOS WHERE Id = @id";
             try
             {
-                datos.consulta(consulta);
-                datos.setParametro("@id", disco.Id);
-                datos.ejecutarConsulta();
+                tablaDiscos.consulta(consulta);
+                tablaDiscos.setParametro("@id", disco.Id);
+                tablaDiscos.ejecutarConsulta();
             }
             catch (Exception ex)
             {
@@ -105,7 +107,46 @@ namespace negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                tablaDiscos.cerrarConexion();
+            }
+        }
+
+        public void deshabilitarDisco(Disco disco)
+        {
+            AccesoDatos tablaDiscos = new AccesoDatos("DISCOS_DB");
+            try
+            {
+            string consulta = "UPDATE DISCOS SET Activo = 0 WHERE Id = @Id";
+                tablaDiscos.consulta(consulta);
+                tablaDiscos.setParametro("@Id", disco.Id);
+                tablaDiscos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                tablaDiscos.cerrarConexion();
+            }
+        }
+
+        public void recuperarDiscos()
+        {
+            AccesoDatos tablaDiscos = new AccesoDatos("DISCOS_DB");
+            try
+            {
+                string consulta = "UPDATE DISCOS SET Activo = 1 WHERE Activo = 0";
+                tablaDiscos.consulta(consulta);
+                tablaDiscos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                tablaDiscos.cerrarConexion();
             }
         }
 
@@ -187,5 +228,7 @@ namespace negocio
                 con.cerrarConexion();
             }
         }
+
+
     }
 }
